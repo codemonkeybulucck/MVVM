@@ -9,6 +9,7 @@
 #import "LoginViewModel.h"
 #import "LoginModel.h"
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface LoginViewModel()
 @property (nonatomic, strong) LoginModel *model;
@@ -63,6 +64,7 @@
             [[NSUserDefaults standardUserDefaults] setValue:self.username forKey:@"username"];
             [[NSUserDefaults standardUserDefaults] setValue:self.password forKey:@"password"];
             NSDictionary *para = @{@"nickName":@"lemon",@"website":@"http://www.lemon2well.top"};
+            [AppDelegate sharedAPPDelegate].loginUser = [[LoginModel alloc] initWithUsername:self.username password:self.password];
             if (success) {
                 success(para);
             }

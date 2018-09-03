@@ -7,6 +7,8 @@
 //
 
 #import "LMLoginViewModel.h"
+#import "AppDelegate.h"
+#import "LoginModel.h"
 
 @interface LMLoginViewModel()
 @property (nonatomic, copy) NSString *avatarUrlString;
@@ -47,6 +49,8 @@
                     //保存账号信息到本地，这里只是示例，建议账号信息加密保存到keychain
                     [[NSUserDefaults standardUserDefaults] setValue:self.username forKey:@"username"];
                     [[NSUserDefaults standardUserDefaults] setValue:self.password forKey:@"password"];
+                    //保存到缓存
+                    [AppDelegate shareAPPDelegate].loginUser = [[LoginModel alloc] initWithUsername:self.username password:self.password];
                     NSDictionary *para = @{@"nickName":@"lemon",@"website":@"http://www.lemon2well.top"};
                     [subscriber sendNext:para];
                     [subscriber sendCompleted];
